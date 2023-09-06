@@ -1,5 +1,12 @@
 class Solution {
 public:
+// We can solve this problem using Four approaches. (Here I have explained all the possible solutions of this problem).
+
+// Solved using Array(Three Nested Loop). Brute Force Approach.
+// Solved using Array + Sorting. Brute Better Approach.
+// Solved using Array + Hash Table(Unordered map). Optimize Approach.
+// Solved using Array + Hash Table (Unordered set). Optimize Approach.
+    
         //Brute force:
         /*
         int ans = 1;
