@@ -127,10 +127,11 @@ Node* merge(Node* a, Node* b){
         }
     }
     if(!a) curr->bottom = b;
-    if(!b) curr->bottom = a;
+    else curr->bottom = a;
     ans = ans->bottom;
     return ans;    
 }
+
 Node* flatten(Node* head){
     if(!head || !head->next) return head;
     Node* res = flatten(head->next);
