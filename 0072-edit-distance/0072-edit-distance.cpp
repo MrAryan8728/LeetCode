@@ -64,7 +64,7 @@ class Solution {
 public:
     int minDistance(string word1, string word2) {
         int m = word1.size(),n =  word2.size();
-        vector<vector<int>> dp(m + 1,vector<int>(n + 1,0));
+        vector<vector<int>> dp(501,vector<int>(501,0));
         // return solve(word1,word2,m-1,n-1,dp);
         for(int i = 0;i <= m;i++) dp[i][0] = i;
         for(int j = 0;j <= n;j++) dp[0][j] = j;
