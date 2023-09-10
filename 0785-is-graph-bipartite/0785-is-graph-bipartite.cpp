@@ -1,6 +1,6 @@
 class Solution {
 public:
-    /*
+/*
 The approach used in this solution is to perform a depth-first search (DFS) on the graph and assign colors to the nodes in a way that ensures no two adjacent nodes have the same color. If it is possible to assign colors to all nodes without any conflicts, then the graph is bipartite.
 
 
@@ -16,6 +16,7 @@ If the dfs function completes without finding any conflicts, it means all nodes 
 Overall, this solution uses DFS to assign colors to the nodes of the graph and checks for conflicts along the way to determine if the graph is bipartite.
     */
     bool isBipartite(vector<vector<int>>& graph) {
+       /* Using dfs
         int n = graph.size();
         int clr = 0;
         
@@ -25,10 +26,40 @@ Overall, this solution uses DFS to assign colors to the nodes of the graph and c
                 if(!dfs(i,clr,graph,color)) return false;
             }
         }
+        return true;*/
+
+        int n = graph.size();
+        int clr = 0;
         
+        vector<int> color(n,-1);
+        for(int i = 0;i < n;i++){
+            if(color[i] == -1){
+                if(!bfs(i,clr,graph,color)) return false;
+            }
+        }
         return true;
     }
-    bool dfs(int i,int clr,vector<vector<int>>& graph,vector<int> &color){
+    
+    bool bfs(int i,int clr,vector<vector<int>> &graph,vector<int> &color){
+        queue<int> q;
+        q.push(i);
+        color[i] = 0;
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            for(auto it:graph[node]){
+                if(color[it] == -1){
+                    color[it] = 1 - color[node];
+                    q.push(it);
+                }else if(color[it] == color[node]){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+   /* bool dfs(int i,int clr,vector<vector<int>>& graph,vector<int> &color){
         color[i] = clr;
         
         for(auto it: graph[i]){
@@ -41,4 +72,5 @@ Overall, this solution uses DFS to assign colors to the nodes of the graph and c
         
         return true;
     }
+    */
 };
