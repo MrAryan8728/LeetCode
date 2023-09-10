@@ -10,7 +10,7 @@ class Solution
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
-	    /*Topo sort using dfs
+	    /*Topo sort using dfsl*/
 	    stack<int> st;
 	    vector<int> vis(V,0);
 	    
@@ -25,8 +25,8 @@ class Solution
 	        ans.push_back(st.top());
 	        st.pop();
 	    }
-	    return ans;*/
-	    vector<int> indeg(V);
+	    return ans;
+	    /*vector<int> indeg(V);
 	    for(int i = 0;i < V;i++){
 	        for(auto it:adj[i]){
 	           indeg[it]++;
@@ -54,8 +54,9 @@ class Solution
 	    }
 	    
 	    return ans;
+	    */
 	}
-	/* Using dfs for topo sort
+	/* Using dfs for topo sort*/
 	void dfs(int i,vector<int> &vis,stack<int> &st,vector<int> adj[]){
 	    vis[i] = 1;
 	    
@@ -66,7 +67,7 @@ class Solution
 	    }
 	    
 	    st.push(i);
-	}*/
+	}
 };
 
 //{ Driver Code Starts.
