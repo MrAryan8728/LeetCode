@@ -14,28 +14,28 @@ class Solution {
     */
     vector<int> bellman_ford(int V, vector<vector<int>>& edges, int S) {
         // Code here
-        vector<int> distance(V,1e8);
-        distance[S] = 0;
+        vector<int> dist(V,1e8);
+        dist[S] = 0;
+        //N-1 times krne ke liye hai ye.
         for(int i = 0;i < V;i++){
             for(auto it:edges){
-            int u = it[0];
-            int v = it[1];
-            int wt = it[2];
-                if(distance[u] != 1e9 and distance[u] + wt < distance[v]){
-                    distance[v] = distance[u] + wt;
+                int u = it[0];
+                int v = it[1];
+                int wt = it[2];
+                if(wt + dist[u] < dist[v] and dist[u] != 1e8){
+                    dist[v] = dist[u] + wt;
                 }
             }
         }
-         for(auto it:edges){
+        for(auto it:edges){
             int u = it[0];
             int v = it[1];
             int wt = it[2];
-                if(distance[u] != 1e9 and distance[u] + wt < distance[v]){
-                    return {-1};
-                }
+            if(wt + dist[u] < dist[v] and dist[u] != 1e8){
+                return {-1};
             }
-        
-        return distance;
+        }
+        return dist;
     }
 };
 
