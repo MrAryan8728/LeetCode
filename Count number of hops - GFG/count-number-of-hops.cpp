@@ -12,16 +12,17 @@ class Solution
     long long countWays(int n)
     {
         // your code here
-        vector<long long> dp(n + 1,-1);
-        return solve(n,dp);
-    }
-    long long solve(int n,vector<long long> &dp){
-        if(n < 0) return 0;
         if(n == 1) return 1;
         if(n == 2) return 2;
         if(n == 3) return 4;
-        if(dp[n] != -1) return dp[n];
-        return dp[n] = (solve(n-1,dp)%mod + solve(n-2,dp)%mod + solve(n-3,dp)%mod)%mod;
+        vector<long long> dp(n + 1,0);
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
+        for(int i = 4;i <= n;i++){
+            dp[i] = (dp[i-1] + dp[i-2] + dp[i-3])%mod;
+        }
+        return dp[n];
     }
 };
 
