@@ -14,20 +14,18 @@ public:
         // code here
         int sum = accumulate(arr,arr + N,0);
         if(sum % 2 == 1) return 0;
-        
-        vector<vector<int>> dp(sum/2 + 1,vector<int>(N+1,-1));
-        
-        int get = solve(sum/2,arr,N-1,dp);
-        if(get == 0) return 0;
-        return 1;
+        int target = sum/2;
+        vector<vector<int>> dp(target + 1,vector<int>(N + 1,-1));
+        int get = solve(target,0,arr,N,dp);
+        return (get == 0)?0:1;
     }
-    int solve(int target,int arr[],int i,vector<vector<int>> &dp){
+    int solve(int target,int i,int arr[],int N,vector<vector<int>> &dp){
         if(target == 0) return 1;
-        if(i < 0) return 0;
+        if(i == N) return 0;
         if(dp[target][i] != -1) return dp[target][i];
         int pick = 0;
-        if(target - arr[i] >= 0) pick = solve(target-arr[i],arr,i-1,dp);
-        int not_pick = solve(target,arr,i-1,dp);
+        if(target - arr[i] >= 0) pick = solve(target-arr[i],i + 1,arr,N,dp);
+        int not_pick = solve(target,i + 1,arr,N,dp);
         return dp[target][i] = pick + not_pick;
     }
 };
