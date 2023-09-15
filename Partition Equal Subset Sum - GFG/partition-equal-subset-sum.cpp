@@ -9,15 +9,26 @@ using namespace std;
 
 class Solution{
 public:
-    int equalPartition(int N, int arr[])
-    {
-        // code here
-        int sum = accumulate(arr,arr + N,0);
-        if(sum % 2 == 1) return 0;
-        int target = sum/2;
-        vector<vector<int>> dp(target + 1,vector<int>(N + 1,-1));
-        int get = solve(target,0,arr,N,dp);
-        return (get == 0)?0:1;
+    int equalPartition(int N, int arr[]) {
+    int sum = accumulate(arr, arr + N, 0);
+    if (sum % 2 == 1) return 0;
+    int target = sum / 2;
+    vector<vector<int>> dp(target + 1, vector<int>(N + 1, 0));
+
+    for (int i = 0; i <= N; i++) {
+        dp[0][i] = 1;
+    }
+
+    for (int i = 1; i <= target; i++) {
+        for (int j = N - 1; j >= 0; j--) {
+            dp[i][j] = dp[i][j + 1];
+            if (i >= arr[j]) {
+                dp[i][j] += dp[i - arr[j]][j + 1];
+            }
+        }
+    }
+
+    return dp[target][0] == 0 ? 0 : 1;
     }
     int solve(int target,int i,int arr[],int N,vector<vector<int>> &dp){
         if(target == 0) return 1;
