@@ -11,16 +11,13 @@ class Solution
     int FindMaxSum(int arr[], int n)
     {
         // Your code here
-        vector<int> dp(n + 1,-1);
-        return solve(0,arr,n,dp);
-    }
-    int solve(int i,int arr[],int n,vector<int> &dp){
-        if(i >= n) return 0;
-        if(dp[i] != -1) return dp[i];
-        int pick = solve(i+2,arr,n,dp) + arr[i];
-        int not_pick = solve(i+1,arr,n,dp);
-
-        return dp[i] = max(pick,not_pick);
+        vector<int> dp(n + 1,0);
+        dp[0] = arr[0];
+        dp[1] = max(arr[0],arr[1]);
+        for(int i = 2;i < n;i++){
+            dp[i] = max(dp[i - 2] + arr[i], dp[i - 1]);
+        }
+        return dp[n - 1];
     }
 };
 
